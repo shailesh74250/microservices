@@ -7,6 +7,7 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { swaggerConfig } from './config/swagger.config';
 import { databaseConfig } from './config/database.config';
+import { AuthController } from './modules/auth/api/auth.controller';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { databaseConfig } from './config/database.config';
       load: [swaggerConfig, databaseConfig],
     }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, AuthController],
   providers: [AppService],
 })
 export class AppModule {}
