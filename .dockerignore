@@ -1,0 +1,47 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules
+dist
+coverage
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+.env.local
+
+# Git files
+.git
+.gitignore
+
+# Docker files (optional, but good practice)
+Dockerfile
+.dockerignore
+
+# IDE files and directories (VS Code, IntelliJ, etc.)
+.idea
+.vscode
+*.swp
+*.swo
+
+# Temporary files
+tmp
+temp
+
+# Node specific
+/build
+/out
+
+# other files that are not needed in production
+test/
+src/**/*.spec.ts
+src/**/*.test.ts
