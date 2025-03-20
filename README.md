@@ -56,6 +56,7 @@
   - Setup CORS configuration.
 - Rate Limiting:
   - Implement rate limiting to prevent abuse.
+- Support Web Socket 
 
 ## Documentation
 - README.md:
@@ -64,6 +65,14 @@
   - Document the API.
 - Code Comments:
   - Use meaningful code comments to explain complex logic.
+
+## Securities
+- XSS, Dos Attack, CSRF Protection
+- Rate Limiting
+- Encryption and Hashing
+- Authorization
+- API key
+- CORS
 
 ## Authentication & Authorization
 - JWT-based authentication (@nestjs/jwt)
