@@ -3,11 +3,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
-import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { swaggerConfig } from './config/swagger.config';
-import { databaseConfig } from './config/database.config';
-import { AuthController } from './modules/auth/api/auth.controller';
+// import { databaseConfig } from './config/database.config';
+// import { AuthController } from './modules/auth/api/auth.controller';
+import { DatabaseModule } from './infrastructure/database/database.module';
+import databaseConfig from './config/database.config';
 
 @Module({
   imports: [
@@ -20,8 +21,7 @@ import { AuthController } from './modules/auth/api/auth.controller';
       load: [swaggerConfig, databaseConfig],
     }),
   ],
-  controllers: [AppController, AuthController],
+  controllers: [AppController],
   providers: [AppService],
-  exports: [UsersModule]
 })
 export class AppModule {}

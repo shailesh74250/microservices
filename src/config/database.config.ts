@@ -1,16 +1,19 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { registerAs } from '@nestjs/config';
+import { DataSourceOptions } from 'typeorm';
 
-ConfigModule.forRoot(); // Load environment variables
-
-export const databaseConfig = (): TypeOrmModuleOptions => ({
-  type: 'postgres',
+export const databaseConfig: DataSourceOptions = {
+  type: 'postgres', // `as const` is not needed here
   host: process.env.DB_HOST || 'localhost',
-  port: Number(process.env.DB_PORT) || 5432,
+  port: parseInt(process.env.DB_PORT || '5432', 10),
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'postgres',
-  database: process.env.DB_NAME || 'test_db',
-  entities: [__dirname + '/../**/*.entity{.ts,.js}'], // Load entities dynamically
-  synchronize: process.env.DB_SYNC === 'true', // Enable only in development
-  logging: process.env.DB_LOGGING === 'true', // Enable logging if required
-});
+  database: process.env.DB_DATABASE || 'test_db',
+  entities: [`${__dirname}/../**/*.entity.{ts,js}`], // Corrected entity path
+  migrations: [`${__dirname}/migrations/*.{ts,js}`], // Corrected migrations path
+  synchronize: process.env.NODE_ENV === 'development', // Disable in production
+  logging: process.env.NODE_ENV === 'development',
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+};
+
+// ✅ Export as NestJS config module
+export default registerAs('database', () => databaseConfig);

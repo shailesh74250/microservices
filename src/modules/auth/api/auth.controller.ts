@@ -1,17 +1,18 @@
 import { Controller, Get, Post } from '@nestjs/common';
-import { UserController } from 'src/modules/users/api/user.controller';
+import { AuthService } from '../service/auth.service';
+// import { UserController } from 'src/modules/users/api/user.controller';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private userController: UserController) {}
+  constructor(private authService: AuthService) {}
 
-  @Post()
+  @Post('login')
   login() {
-    return 'auth'
+    return this.authService.login();
   }
 
-  @Post()
+  @Post('register')
   register() {
-    this.userController.createUser();
+    return this.authService.register();
   }
 }
